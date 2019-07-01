@@ -1,19 +1,34 @@
 import chisel3._
 import firrtl.{ExecutionOptionsManager, HasFirrtlOptions}
 
-class GameOfLife(rows: Int, columns: Int, nextStateGenerator: NextStateGenerator) extends Module {
+class GameOfLife(rows: Int, columns: Int, cellGenerator: (Int) => Cell) extends Module {
   require(rows > 0)
   require(columns > 0)
   val io = IO(new Bundle {
     val currentState = Input(Vec(rows, Vec(columns, Bool())))
+    val enable = Input(Bool())
     val nextState = Output(Vec(rows, Vec(columns, Bool())))
   })
 
+  private val neighbourPositionsOfAllCells = Seq.range(0, rows).map(
+    row => Seq.range(0, columns).map(column => getNeighbours(Position(row, column)))
+  )
+
+  private val cells = Seq.range(0, rows).map(
+    row => Seq.range(0, columns).map(column => Module(cellGenerator(neighbourPositionsOfAllCells(row)(column).length)).io)
+  )
 
   def configureCell(row: Int, col: Int): Unit = {
-    val neighbours = getNeighbours(Position(row, col))
-    val currentStateOfNeighbour = VecInit(neighbours.map(neighbour => io.currentState(neighbour.x)(neighbour.y)))
-    io.nextState(row)(col) := nextStateGenerator.getNextState(currentStateOfNeighbour, io.currentState(row)(col))
+    val cell = cells(row)(col)
+    cell.initialState := io.currentState(row)(col)
+    cell.enable := io.enable
+    val neighbours = neighbourPositionsOfAllCells(row)(col)
+    for (i <- neighbours.indices) {
+      val neighbour = neighbours(i)
+      val neighbourCell = cells(neighbour.x)(neighbour.y)
+      cell.currentStateOfNeighbours(i) := neighbourCell.currentState
+    }
+    io.nextState(row)(col) := cell.currentState
   }
 
   for (row <- 0 until rows; column <- 0 until columns) {
@@ -61,7 +76,5 @@ class GameOfLife(rows: Int, columns: Int, nextStateGenerator: NextStateGenerator
 object GameOfLife extends App {
   val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
   optionsManager.setTargetDirName("fpga_dir")
-  Driver.execute(optionsManager, () => new GameOfLife(2, 2, new NextStateGenerator))
+  Driver.execute(optionsManager, () => new GameOfLife(1, 1, (n: Int) => new Cell(n)))
 }
-
-case class Cell(x: Int, y: Int)
