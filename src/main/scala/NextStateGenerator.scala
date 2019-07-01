@@ -1,11 +1,7 @@
 import chisel3._
 
 class NextStateGenerator extends Module {
-  val io = IO(new Bundle{
-    val input = Input(Vec(8,Bool()))
-    val presentState = Input(Bool())
-    val nextState = Output(Bool())
-  })
+  val io = IO(new NextStateGeneratorBundle)
 
   private def calculate(vec: Vec[Bool]): UInt = vec.count(x => x)
 

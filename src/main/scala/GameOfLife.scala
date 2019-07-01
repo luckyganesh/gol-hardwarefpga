@@ -28,7 +28,7 @@ class GameOfLife(rows: Int, columns: Int) extends Module {
     cell.presentState := input(row)(col)
   }
   for (row <- 0 until rows; column <- 0 until columns) {
-//    instantiateCells(row,column,cells(row)(column),io.input)
+    instantiateCells(row,column,cells(row)(column),io.input)
       io.output(row)(column) := cells(row)(column).nextState
 //      io.output(row)(column) := 0.U
     }
