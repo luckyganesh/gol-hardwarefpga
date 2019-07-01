@@ -1,0 +1,5 @@
+.idea/
+*.json
+*.fir
+*.v
+fpga_dir/
