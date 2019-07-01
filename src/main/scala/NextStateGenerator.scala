@@ -1,4 +1,5 @@
 import chisel3._
+import firrtl.{ExecutionOptionsManager, HasFirrtlOptions}
 
 class NextStateGenerator extends Module {
   val io = IO(new NextStateGeneratorBundle)
@@ -13,5 +14,7 @@ class NextStateGenerator extends Module {
 }
 
 object NextStateGenerator extends App{
-  Driver.execute(args,() => new NextStateGenerator)
+  val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
+  optionsManager.setTargetDirName("fpga_dir")
+  Driver.execute(optionsManager,() => new NextStateGenerator)
 }

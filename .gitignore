@@ -2,3 +2,4 @@ project/*
 .idea/*
 target/*
 test_run_dir/*
+fpga_dir/*

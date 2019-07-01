@@ -1,4 +1,4 @@
-import chisel3.{Bool, Vec, _}
+import chisel3._
 import firrtl.{ExecutionOptionsManager, HasFirrtlOptions}
 
 class GameOfLife(rows: Int, columns: Int) extends Module {
@@ -9,14 +9,14 @@ class GameOfLife(rows: Int, columns: Int) extends Module {
     val output = Output(Vec(rows, Vec(columns, Bool())))
   })
 
-  val cells = VecInit(Seq.fill(rows) {
-    VecInit(Seq.fill(columns){
+  val cells = Seq.fill(rows) {
+    Seq.fill(columns){
       Module(new NextStateGenerator()).io
-    })
-  })
+    }
+  }
 
 
-  def instantiateCells(row: Int, col: Int,cell: NextStateGeneratorBundle,input: Vec[Vec[Bool]]):Unit = {
+  def configureCell(row: Int, col: Int, cell: NextStateGeneratorBundle, input: Vec[Vec[Bool]]):Unit = {
     val neighbours = getNeighbours(Cell(row,col))
     for (i <- neighbours.indices){
       val neighbour = neighbours(i)
@@ -28,9 +28,8 @@ class GameOfLife(rows: Int, columns: Int) extends Module {
     cell.presentState := input(row)(col)
   }
   for (row <- 0 until rows; column <- 0 until columns) {
-    instantiateCells(row,column,cells(row)(column),io.input)
+      configureCell(row,column,cells(row)(column),io.input)
       io.output(row)(column) := cells(row)(column).nextState
-//      io.output(row)(column) := 0.U
     }
 
   case class Cell(x: Int, y: Int)
@@ -67,7 +66,7 @@ class GameOfLife(rows: Int, columns: Int) extends Module {
     possibleNeighbours.filter(possibleNeighbour => isWithinBound(bounds, possibleNeighbour))
   }
 
-  private def getNeighbours(cell: Cell): List[Cell] = getValidNeighbours(Bounds(topLeft = Cell(0, 0), bottomRight = Cell(rows, columns)), cell)
+  private def getNeighbours(cell: Cell): List[Cell] = getValidNeighbours(Bounds(topLeft = Cell(0, 0), bottomRight = Cell(rows-1, columns-1)), cell)
 }
 
 
