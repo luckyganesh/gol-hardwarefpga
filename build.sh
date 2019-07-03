@@ -1,5 +1,7 @@
 #! /bin/sh
 set -e
 
-sbt "runMain adder.Adder_wrapper"
-quartus_sh --flow compile Adder
+sbt "runMain GameOfLifeWrapper"
+cd fpga/
+:
+quartus_sh --flow compile GameOfLife

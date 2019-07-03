@@ -1,1 +1,1 @@
-quartus_pgm -m jtag -o "p;output_files/Adder.sof@2"
+quartus_pgm -m jtag -o "p;fpga/output_files/GameOfLife.sof@2"
