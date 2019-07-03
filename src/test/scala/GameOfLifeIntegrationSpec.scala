@@ -1,8 +1,9 @@
 import chisel3.iotesters._
 import dimensions.Size
+import org.scalatest.{FlatSpec, Matchers}
 
 class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
-  poke(c.io.enable,0)
+  poke(c.io.initialize,1)
 
   val inputSeq = Seq(Seq(false,false,false),Seq(true,true,true),Seq(false,false,false))
   for (i <- inputSeq.indices) {
@@ -11,7 +12,7 @@ class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
     }
   }
   step(4)
-  poke(c.io.enable,1)
+  poke(c.io.initialize,0)
 
   step(1)
   val expectation1 = Seq(Seq(false,true,false),Seq(false,true,false),Seq(false,true,false))
@@ -40,10 +41,12 @@ class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
 
 }
 
-object GameOfLifeIntegrationTest extends App {
-  Driver(() => new GameOfLife(Size(3,3), n => new Cell(n), new Connector)){
-    c => {
-      new GameOfLifeIntegrationTest(c)
-    }
+class GameOfLifeIntegrationSpec extends FlatSpec with Matchers {
+  it should "simulate game of life" in {
+    Driver(() => new GameOfLife(Size(3,3), n => new Cell(n), new Connector)){
+      c => {
+        new GameOfLifeIntegrationTest(c)
+      }
+    } should be(true)
   }
 }

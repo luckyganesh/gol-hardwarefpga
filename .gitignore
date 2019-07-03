@@ -3,3 +3,8 @@ project/*
 target/*
 test_run_dir/*
 fpga_dir/*
+.qsys_edit/
+db/
+soc_system/
+soc_system.sopcinfo
+*.bak
