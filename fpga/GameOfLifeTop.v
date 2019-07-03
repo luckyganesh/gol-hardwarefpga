@@ -1,4 +1,6 @@
-module gol (
+`include "chisel_output/GameOfLifeWrapper.v"
+
+module GameOfLifeTop (
 
     //////////// CLOCK //////////
     input FPGA_CLK1_50,
@@ -113,7 +115,7 @@ module gol (
         .io_address_to_access(onchip_memory2_0_address),
         .io_starting_address(start_address_pio_input_export),
         .io_result_address(result_address_pio_input_export),
-        .io_enable(initialize_pio_input_export),
+        .io_initialize(initialize_pio_input_export),
         .io_completed(completed_pio_output_export),
         .io_write_data(onchip_memory2_0_writedata),
         .io_read_data(onchip_memory2_0_readdata),
@@ -121,8 +123,6 @@ module gol (
         .reset(reset_pio_input_export),
         .io_write_enable(write_enable),
     );
-
-    assign LED[1] = is_enabled;
 
     reg [25:0] counter;
     reg led_level;

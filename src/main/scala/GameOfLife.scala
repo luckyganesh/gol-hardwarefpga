@@ -1,6 +1,5 @@
 import chisel3._
 import dimensions._
-import firrtl.{ExecutionOptionsManager, HasFirrtlOptions}
 import neighbourFinder._
 
 class GameOfLife(size: Size, cellGenerator: Int => Cell, connector: Connector) extends Module {
@@ -37,11 +36,4 @@ class GameOfLife(size: Size, cellGenerator: Int => Cell, connector: Connector) e
   for (row <- 0 until size.rows; column <- 0 until size.columns) {
     configureCell(row, column)
   }
-}
-
-
-object GameOfLife extends App {
-  val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
-  optionsManager.setTargetDirName("fpga_dir")
-  Driver.execute(optionsManager, () => new GameOfLife(Size(2, 2), (n: Int) => new Cell(n), new Connector))
 }
