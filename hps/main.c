@@ -47,7 +47,7 @@ void gol_test(void *virtual_base, uint8_t *input) {
 
     for(int i=0; i<ROWS; i++) {
         for(int j=0; j<COLS; j++) {
-            void *data_addr = virtual_base + 0x0000 + i*COLS + j;
+            void *data_addr = virtual_base + *(uint16_t *)start_data_addr + i*COLS + j;
             printf("%d ", *(uint8_t *) data_addr);
         }
         printf("\n");
@@ -61,7 +61,7 @@ void gol_test(void *virtual_base, uint8_t *input) {
         while(*(uint8_t *) complete_signal_addr != 1);
         for(int i=0; i<ROWS; i++) {
             for(int j=0; j<COLS; j++) {
-                void *data_addr = virtual_base + 0x0100 + i*COLS + j;
+                void *data_addr = virtual_base + *(uint16_t *)result_data_addr + i*COLS + j;
                 printf("%d ", *(uint8_t *) data_addr);
             }
             printf("\n");
