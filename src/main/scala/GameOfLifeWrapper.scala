@@ -14,6 +14,9 @@ class GameOfLifeWrapper(size: Size) extends Module {
     val write_data = Output(UInt(8.W))
     val address_to_access = Output(UInt(12.W))
     val completed = Output(Bool())
+    val counter1 = Output(UInt(3.W))
+    val counter2 = Output(UInt(3.W))
+    val counter3 = Output(Bool())
   })
 
   val gameOfLife = Module(new GameOfLife(size, n => new Cell(n), new Connector))
@@ -21,36 +24,43 @@ class GameOfLifeWrapper(size: Size) extends Module {
   gameOfLife.io.initialize := io.initialize
   gameOfLife.io.start := io.start.asClock()
 
-  val initializationCounter = RegInit(0.U(log2Ceil(size.total).W))
-  val writeCounter = RegInit(0.U(log2Ceil(size.total).W))
+  val initializationCounter = RegInit(0.U(log2Ceil(size.total + 1).W))
+  val writeCounter = RegInit(0.U(log2Ceil(size.total + 2).W))
 
   when(io.initialize) {
-    initializationCounter := Mux(initializationCounter === size.total.U, initializationCounter, initializationCounter + 1.U)
+    initializationCounter := Mux(initializationCounter === (size.total + 1).U, initializationCounter, initializationCounter + 1.U)
+  }.otherwise {
+    initializationCounter := 0.U
   }
-
-  io.address_to_access := Mux(io.initialize, initializationCounter + io.starting_address, writeCounter + io.result_address)
 
   private val initialStates = Reg(Vec(size.rows, Vec(size.columns, Bool())))
 
-  initialStates(initializationCounter / size.rows.U)(initializationCounter % size.columns.U) := io.read_data
+  when(initializationCounter > 0.U && initializationCounter < (size.total + 1).U) {
+    initialStates((initializationCounter - 1.U) / size.rows.U)((initializationCounter - 1.U) % size.columns.U) := io.read_data
+  }
+
+  io.address_to_access := Mux(io.initialize, initializationCounter + io.starting_address, (writeCounter - 1.U) + io.result_address)
 
   gameOfLife.io.initialState := initialStates
 
-  io.write_data := gameOfLife.io.currentState((writeCounter - 1.U) / size.rows.U)(writeCounter % size.columns.U)
+  io.write_data := gameOfLife.io.currentState((writeCounter - 1.U) / size.rows.U)((writeCounter - 1.U) % size.columns.U)
 
-  io.write_enable := writeCounter > 0.U && writeCounter <= (size.total + 1).U
+  io.write_enable := !io.initialize && writeCounter > 0.U && writeCounter <= (size.total + 1).U
 
   private val prevState = RegNext(io.start)
   private val startTrigger = io.start === true.B && prevState === false.B
+  io.counter1 := gameOfLife.io.initialState(0).asUInt()
+  io.counter2 := gameOfLife.io.currentState(0).asUInt()
 
-  io.completed := writeCounter === (size.total + 1).U
-  when(true.B) {
-    writeCounter := Mux(writeCounter === (size.total + 1).U, Mux(startTrigger, 0.U, (size.total + 1).U), writeCounter + 1.U)
-  }
+  io.counter3 := io.start
+  io.completed := writeCounter === (size.total + 2).U
+//  when(true.B) {
+    writeCounter := Mux(writeCounter === (size.total + 2).U , Mux(startTrigger, 0.U,writeCounter), writeCounter + 1.U)
+//  }
 }
 
 object GameOfLifeWrapper extends App {
   val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
   optionsManager.setTargetDirName("fpga/chisel_output")
-  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(3, 3)))
+  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(15,15)))
 }

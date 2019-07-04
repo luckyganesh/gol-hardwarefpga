@@ -114,14 +114,18 @@ module GameOfLifeTop (
     GameOfLifeWrapper GameOfLifeWrapper0(
         .io_address_to_access(onchip_memory2_0_address),
         .io_starting_address(start_address_pio_input_export),
-        .io_result_address(result_address_pio_input_export),
+        .io_result_address(12'h100),
         .io_initialize(initialize_pio_input_export),
         .io_completed(completed_pio_output_export),
         .io_write_data(onchip_memory2_0_writedata),
         .io_read_data(onchip_memory2_0_readdata),
+        .io_start(start_pio_output_export),
         .clock(fpga_clk_50),
         .reset(reset_pio_input_export),
         .io_write_enable(write_enable),
+        .io_counter1(LED[3:1]),
+        .io_counter2(LED[7:5]),
+        .io_counter3(LED[4])
     );
 
     reg [25:0] counter;
