@@ -54,5 +54,5 @@ class GameOfLifeWrapper(size: Size) extends Module {
 object GameOfLifeWrapper extends App {
   val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
   optionsManager.setTargetDirName("fpga/chisel_output")
-  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(3,3)))
+  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(15,15)))
 }

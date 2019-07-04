@@ -16,8 +16,8 @@
 #define RESET_SIGNAL_ADDR   ( 0x5000 )
 #define START_SIGNAL_ADDR   ( 0x6000 )
 
-#define ROWS 3
-#define COLS 3
+#define ROWS 15
+#define COLS 15
 #define TOTAL ROWS*COLS
 
 void gol_test(void *virtual_base, uint8_t *input) {
@@ -29,8 +29,8 @@ void gol_test(void *virtual_base, uint8_t *input) {
     void *complete_signal_addr = virtual_base + COMPLETED_ADDR;
 
 
-    *(uint16_t *)start_data_addr = 0x013;
-    *(uint16_t *)result_data_addr = 0x023;
+    *(uint16_t *)start_data_addr = 0x200;
+    *(uint16_t *)result_data_addr = 0x100;
 
     *(uint8_t *) reset_addr = 1;
     *(uint8_t *) reset_addr = 0;
@@ -80,9 +80,30 @@ int main() {
 	virtual_base = mmap( NULL , HW_REGS_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, HW_REGS_BASE );
 
     uint8_t input[ROWS*COLS] = {
-        0,0,0,
-        1,1,1,
-        0,0,0
+//        0,0,0,
+//        1,1,1,
+//        0,0,0
+//    };
+
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0
     };
 
 	gol_test(virtual_base, input);
