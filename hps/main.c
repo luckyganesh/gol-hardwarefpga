@@ -28,16 +28,17 @@ void gol_test(void *virtual_base, uint8_t *input) {
     void *start_signal_addr = virtual_base + START_SIGNAL_ADDR;
     void *complete_signal_addr = virtual_base + COMPLETED_ADDR;
 
+
+    *(uint16_t *)start_data_addr = 0x013;
+    *(uint16_t *)result_data_addr = 0x023;
+
     *(uint8_t *) reset_addr = 1;
     *(uint8_t *) reset_addr = 0;
 
     for(int i=0; i<TOTAL; i++) {
-        void *data_addr = virtual_base + MEM_ADDR + i;
+        void *data_addr = virtual_base + MEM_ADDR + *(uint16_t *)start_data_addr + i;
         *(uint8_t *) data_addr = input[i];
     }
-
-    *(uint16_t *)start_data_addr = 0x0000;
-    *(uint16_t *)result_data_addr = 0x0100;
 
     *(uint8_t *) initialize_addr = 1;
     *(uint8_t *) start_signal_addr = 1;

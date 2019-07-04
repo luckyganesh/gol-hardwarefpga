@@ -48,11 +48,11 @@ module GameOfLifeTop (
 
     wire completed_pio_output_export;
     wire initialize_pio_input_export;
-    wire result_address_pio_input_export;
-    wire start_address_pio_input_export;
-	 wire start_pio_output_export;
+    wire [11:0] result_address_pio_input_export;
+    wire [11:0] start_address_pio_input_export;
+    wire start_pio_output_export;
     wire write_enable;	
-	 wire reset_pio_input_export;
+    wire reset_pio_input_export;
 	 
     wire hps_fpga_reset_n;
     wire fpga_clk_50;
@@ -106,15 +106,14 @@ module GameOfLifeTop (
         .initialize_pio_input_export(initialize_pio_input_export),
         .result_address_pio_input_export(result_address_pio_input_export),
         .start_address_pio_input_export(start_address_pio_input_export),
-		  .start_pio_output_export(start_pio_output_export),
-		  .reset_pio_input_export(reset_pio_input_export)
+        .start_pio_output_export(start_pio_output_export),
+        .reset_pio_input_export(reset_pio_input_export)
     );
-
 
     GameOfLifeWrapper GameOfLifeWrapper0(
         .io_address_to_access(onchip_memory2_0_address),
         .io_starting_address(start_address_pio_input_export),
-        .io_result_address(12'h100),
+        .io_result_address(result_address_pio_input_export),
         .io_initialize(initialize_pio_input_export),
         .io_completed(completed_pio_output_export),
         .io_write_data(onchip_memory2_0_writedata),
