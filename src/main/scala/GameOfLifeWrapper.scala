@@ -54,13 +54,11 @@ class GameOfLifeWrapper(size: Size) extends Module {
 
   io.counter3 := io.start
   io.completed := writeCounter === (size.total + 2).U
-//  when(true.B) {
     writeCounter := Mux(writeCounter === (size.total + 2).U , Mux(startTrigger, 0.U,writeCounter), writeCounter + 1.U)
-//  }
 }
 
 object GameOfLifeWrapper extends App {
   val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
   optionsManager.setTargetDirName("fpga/chisel_output")
-  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(15,15)))
+  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(3,3)))
 }
