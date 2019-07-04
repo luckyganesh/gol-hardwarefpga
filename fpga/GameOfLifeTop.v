@@ -122,10 +122,7 @@ module GameOfLifeTop (
         .io_start(start_pio_output_export),
         .clock(fpga_clk_50),
         .reset(reset_pio_input_export),
-        .io_write_enable(write_enable),
-        .io_counter1(LED[3:1]),
-        .io_counter2(LED[7:5]),
-        .io_counter3(LED[4])
+        .io_write_enable(write_enable)
     );
 
     reg [25:0] counter;
