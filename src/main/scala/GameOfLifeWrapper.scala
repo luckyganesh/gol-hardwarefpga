@@ -18,7 +18,6 @@ class GameOfLifeWrapper(size: Size) extends Module {
 
   val gameOfLife = Module(new GameOfLife(size, n => new Cell(n), new Connector))
 
-  gameOfLife.io.initialize := io.initialize
   gameOfLife.io.start := io.start.asClock()
 
   val initializationCounter = RegInit(0.U(log2Ceil(size.total + 1).W))
@@ -26,8 +25,6 @@ class GameOfLifeWrapper(size: Size) extends Module {
 
   when(io.initialize) {
     initializationCounter := Mux(initializationCounter === (size.total + 1).U, initializationCounter, initializationCounter + 1.U)
-  }.otherwise {
-    initializationCounter := 0.U
   }
 
   private val initialStates = Reg(Vec(size.rows, Vec(size.columns, Bool())))
@@ -47,12 +44,12 @@ class GameOfLifeWrapper(size: Size) extends Module {
   private val prevState = RegNext(io.start)
   private val startTrigger = io.start === true.B && prevState === false.B
 
-  io.completed := writeCounter === (size.total + 2).U
-    writeCounter := Mux(writeCounter === (size.total + 2).U , Mux(startTrigger, 0.U,writeCounter), writeCounter + 1.U)
+  io.completed := Mux(io.initialize, initializationCounter === (size.total + 1).U, writeCounter === (size.total + 2).U)
+  writeCounter := Mux(startTrigger, 0.U,Mux(writeCounter === (size.total + 2).U,writeCounter, writeCounter + 1.U));
 }
 
 object GameOfLifeWrapper extends App {
   val optionsManager = new ExecutionOptionsManager("chisel3") with HasChiselExecutionOptions with HasFirrtlOptions
   optionsManager.setTargetDirName("fpga/chisel_output")
-  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(11,18)))
+  Driver.execute(optionsManager, () => new GameOfLifeWrapper(Size(15,15)))
 }

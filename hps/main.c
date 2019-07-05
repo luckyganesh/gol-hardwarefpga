@@ -3,6 +3,7 @@
 #include <fcntl.h> // this is for open the file.
 #include <sys/mman.h> // this is for mmap and munmap
 #include <stdint.h> // this is for uint32_t
+#include <stdlib.h> // this is for uint32_t
 
 #define HW_REGS_BASE ( 0xff200000 )
 #define HW_REGS_SPAN ( 0x00100000 )
@@ -16,9 +17,34 @@
 #define RESET_SIGNAL_ADDR   ( 0x5000 )
 #define START_SIGNAL_ADDR   ( 0x6000 )
 
-#define ROWS 11
-#define COLS 18
+#define ROWS 15
+#define COLS 15
 #define TOTAL ROWS*COLS
+
+void printTopLine(){
+    printf(" ");
+    for ( int i = 0; i < COLS; i++){
+        printf("--- ");
+    }
+    printf("\n");
+}
+
+void printBoard(uint8_t *input){
+    for(int i=0; i<ROWS; i++) {
+        printTopLine();
+        printf("|");
+        for(int j=0; j<COLS; j++) {
+            if(input[i*COLS + j] == 1){
+                printf(" * ");
+            } else {
+                printf("   ");
+            }
+            printf("|");
+        }
+        printf("\n");
+    }
+    printTopLine();
+}
 
 void gol_test(void *virtual_base, uint8_t *input) {
     void *reset_addr = virtual_base + RESET_SIGNAL_ADDR;
@@ -41,34 +67,26 @@ void gol_test(void *virtual_base, uint8_t *input) {
     }
 
     *(uint8_t *) initialize_addr = 1;
-    *(uint8_t *) start_signal_addr = 1;
-    *(uint8_t *) start_signal_addr = 0;
     while(*(uint8_t *) complete_signal_addr != 1);
+//    usleep(1000 * 1000);
     *(uint8_t *) initialize_addr = 0;
 
-    for(int i=0; i<ROWS; i++) {
-        for(int j=0; j<COLS; j++) {
-            void *data_addr = virtual_base + *(uint16_t *)start_data_addr + i*COLS + j;
-            printf("%d ", *(uint8_t *) data_addr);
-        }
-        printf("\n");
-    }
-    printf("\n");
+    uint8_t current_state[TOTAL];
 
-    int no_of_times = 15;
+    int no_of_times = 10;
     while(no_of_times--) {
         *(uint8_t *) start_signal_addr = 1;
         *(uint8_t *) start_signal_addr = 0;
         while(*(uint8_t *) complete_signal_addr != 1);
-        for(int i=0; i<ROWS; i++) {
-            for(int j=0; j<COLS; j++) {
-                void *data_addr = virtual_base + *(uint16_t *)result_data_addr + i*COLS + j;
-                printf("%d ", *(uint8_t *) data_addr);
-            }
-            printf("\n");
+        for(int i=0;i<TOTAL;i++){
+            void *data_addr = virtual_base + *(uint16_t *)result_data_addr + i;
+            current_state[i] = *(uint8_t *) data_addr;
         }
-        printf("\n");
+        system("clear");
+        printBoard(current_state);
+        usleep(1000000);
     }
+//    free(current_state);
 }
 
 int main() {
@@ -85,40 +103,47 @@ int main() {
 //        0,0,0
 
 // pulsar
-//     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-//     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
-//     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-//
-//     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
-//     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
-//     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
-//
-//     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
-//     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-//     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
-//
-//     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
-//     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
-//     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
-//
-//     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-//     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
-//     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+     0,1,0, 0,0,0, 1,0,1, 0,0,0, 0,1,0,
+
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+     0,0,0, 1,1,1, 0,0,0, 1,1,1, 0,0,0,
+     0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0
 
 //penta - decathlon
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 1,0,0, 0,0,1, 0,0,0, 0,0,0,
+//          0,0,0, 0,1,1, 0,1,1, 1,1,0, 1,1,0, 0,0,0,
+//          0,0,0, 0,0,0, 1,0,0, 0,0,1, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
+//          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0
 
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-          0,0,0, 0,0,0, 1,0,0, 0,0,1, 0,0,0, 0,0,0,
-          0,0,0, 0,1,1, 0,1,1, 1,1,0, 1,1,0, 0,0,0,
-          0,0,0, 0,0,0, 1,0,0, 0,0,1, 0,0,0, 0,0,0,
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0,
-          0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0
+//5*5
+//    1,1,1,1,1,
+//    1,1,1,1,1,
+//    1,1,1,1,1,
+//    1,1,1,1,1,
+//    1,1,1,1,1
     };
 
 	gol_test(virtual_base, input);

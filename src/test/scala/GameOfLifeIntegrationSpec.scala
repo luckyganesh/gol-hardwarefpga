@@ -3,16 +3,19 @@ import dimensions.Size
 import org.scalatest.{FlatSpec, Matchers}
 
 class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
-  poke(c.io.initialize,1)
-
   val inputSeq = Seq(Seq(false,false,false),Seq(true,true,true),Seq(false,false,false))
   for (i <- inputSeq.indices) {
     for (j <- inputSeq(i).indices) {
       poke(c.io.initialState(i)(j), inputSeq(i)(j))
     }
   }
-  step(4)
-  poke(c.io.initialize,0)
+
+  step(1)
+  for (i <- inputSeq.indices) {
+    for (j <- inputSeq(i).indices) {
+      expect(c.io.currentState(i)(j), inputSeq(i)(j))
+    }
+  }
 
   step(1)
   val expectation1 = Seq(Seq(false,true,false),Seq(false,true,false),Seq(false,true,false))

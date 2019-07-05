@@ -20,7 +20,6 @@ class GameOfLifeTest(c: GameOfLife, inputSeq: Seq[Seq[Boolean]], outputSeq: Seq[
   )
 
   cells.zipWithIndex.foreach { case (cell, i) => {
-    assert(connector.connectionMapping(cell.io.initialize) == c.io.initialize)
     assert(connector.connectionMapping(cell.clock) == c.io.start)
     assert(connector.connectionMapping(cell.io.initialState) == c.io.initialState(i / inputSeq.size)(i % inputSeq.head.size))
 
