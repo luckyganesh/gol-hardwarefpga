@@ -86,7 +86,6 @@ void gol_test(void *virtual_base, uint8_t *input) {
         printBoard(current_state);
         usleep(1000000);
     }
-//    free(current_state);
 }
 
 int main() {

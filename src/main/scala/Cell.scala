@@ -13,6 +13,7 @@ class Cell(noOfNeighbourCells: Int) extends Module {
 
   io.currentState := presentState
 
+
   private def numberOfAliveNeighbours(): UInt = io.currentStateOfNeighbours.count(n => n)
 
   private def getNextState(): Bool = {
