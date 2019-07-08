@@ -1,4 +1,4 @@
-`include "chisel_output/GameOfLifeWrapper.v"
+`include "../chisel_output/GameOfLifeWrapper.v"
 
 module GameOfLifeTop (
 
