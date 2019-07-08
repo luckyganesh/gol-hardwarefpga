@@ -69,7 +69,6 @@ set_global_assignment -name IP_FILE ip/soc_system/soc_system_pio_0.ip
 set_global_assignment -name FLOW_ENABLE_EARLY_PLACE ON
 set_instance_assignment -name PARTITION soc_system -to u0 -entity GameOfLifeTop
 set_instance_assignment -name PARTITION_COLOUR 4285530018 -to u0 -entity GameOfLifeTop
-set_instance_assignment -name PRESERVE final -to u0 -entity GameOfLifeTop
 set_instance_assignment -name PLACE_REGION "X1 Y1 X20 Y20" -to u0
 set_instance_assignment -name RESERVE_PLACE_REGION OFF -to u0
 set_instance_assignment -name CORE_ONLY_PLACE_REGION ON -to u0
@@ -79,3 +78,4 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name ENABLE_INTERMEDIATE_SNAPSHOTS ON
 set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
+set_instance_assignment -name RESERVED_CORE ON -to u0 -entity GameOfLifeTop
