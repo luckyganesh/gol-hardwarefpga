@@ -18,8 +18,6 @@ class GameOfLifeWrapper(size: Size) extends Module {
 
   val gameOfLife = Module(new GameOfLife(size, n => new Cell(n), new Connector))
 
-  gameOfLife.io.start := io.start
-
   val initializationCounter = RegInit(0.U(log2Ceil(size.total + 1).W))
   val writeCounter = RegInit(0.U(log2Ceil(size.total + 2).W))
 
@@ -43,6 +41,7 @@ class GameOfLifeWrapper(size: Size) extends Module {
 
   private val prevState = RegNext(io.start)
   private val startTrigger = io.start === true.B && prevState === false.B
+  gameOfLife.io.start := startTrigger
 
   io.completed := Mux(io.initialize, initializationCounter === (size.total + 1).U, writeCounter === (size.total + 2).U)
   writeCounter := Mux(startTrigger, 0.U,Mux(writeCounter === (size.total + 2).U,writeCounter, writeCounter + 1.U));

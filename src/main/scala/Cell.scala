@@ -21,10 +21,7 @@ class Cell(noOfNeighbourCells: Int) extends Module {
     Mux(numberOfNeighboursAlive === 2.U, presentState, numberOfNeighboursAlive === 3.U)
   }
 
-  private val prevState = RegNext(io.start)
-  private val startTrigger = io.start === true.B && prevState === false.B
-
-  when(startTrigger) {
+  when(io.start) {
     presentState := Mux(initialized,getNextState(),io.initialState)
     initialized := true.B
   }
