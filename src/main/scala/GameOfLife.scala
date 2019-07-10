@@ -6,7 +6,7 @@ class GameOfLife(size: Size, cellGenerator: Int => Cell, connector: Connector) e
 
   val io = IO(new Bundle {
     val initialState = Input(Vec(size.rows, Vec(size.columns, Bool())))
-    val start = Input(Clock())
+    val start = Input(Bool())
     val currentState = Output(Vec(size.rows, Vec(size.columns, Bool())))
   })
 
@@ -19,7 +19,7 @@ class GameOfLife(size: Size, cellGenerator: Int => Cell, connector: Connector) e
   )
 
   def configureCell(row: Int, col: Int): Unit = {
-    connector.connect(cells(row)(col).clock, io.start)
+    connector.connect(cells(row)(col).io.start, io.start)
     val cellIO = cells(row)(col).io
     connector.connect(cellIO.initialState, io.initialState(row)(col))
     val neighbours = neighbourPositionsOfAllCells(row)(col)

@@ -46,13 +46,13 @@ module GameOfLifeTop (
 //  REG/WIRE declarations
 //=======================================================
 
-    wire completed_pio_output_export;
-    wire initialize_pio_input_export;
-    wire [11:0] result_address_pio_input_export;
-    wire [11:0] start_address_pio_input_export;
+    wire completed_pio_input_export;
+    wire initialize_pio_output_export;
+    wire [11:0] result_address_pio_output_export;
+    wire [11:0] start_address_pio_output_export;
     wire start_pio_output_export;
     wire write_enable;	
-    wire reset_pio_input_export;
+    wire reset_pio_output_export;
 	 
     wire hps_fpga_reset_n;
     wire fpga_clk_50;
@@ -102,25 +102,25 @@ module GameOfLifeTop (
         .onchip_memory2_0_s2_readdata(onchip_memory2_0_readdata),
         .onchip_memory2_0_s2_writedata(onchip_memory2_0_writedata),
 
-        .completed_pio_output_export(completed_pio_output_export),
-        .initialize_pio_input_export(initialize_pio_input_export),
-        .result_address_pio_input_export(result_address_pio_input_export),
-        .start_address_pio_input_export(start_address_pio_input_export),
+        .completed_pio_input_export(completed_pio_input_export),
+        .initialize_pio_output_export(initialize_pio_output_export),
+        .result_address_pio_output_export(result_address_pio_output_export),
+        .start_address_pio_output_export(start_address_pio_output_export),
         .start_pio_output_export(start_pio_output_export),
-        .reset_pio_input_export(reset_pio_input_export)
+        .reset_pio_output_export(reset_pio_output_export)
     );
 
     GameOfLifeWrapper GameOfLifeWrapper0(
         .io_address_to_access(onchip_memory2_0_address),
-        .io_starting_address(start_address_pio_input_export),
-        .io_result_address(result_address_pio_input_export),
-        .io_initialize(initialize_pio_input_export),
-        .io_completed(completed_pio_output_export),
+        .io_starting_address(start_address_pio_output_export),
+        .io_result_address(result_address_pio_output_export),
+        .io_initialize(initialize_pio_output_export),
+        .io_completed(completed_pio_input_export),
         .io_write_data(onchip_memory2_0_writedata),
         .io_read_data(onchip_memory2_0_readdata),
         .io_start(start_pio_output_export),
         .clock(fpga_clk_50),
-        .reset(reset_pio_input_export),
+        .reset(reset_pio_output_export),
         .io_write_enable(write_enable)
     );
 

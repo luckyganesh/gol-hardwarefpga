@@ -73,8 +73,7 @@ void gol_test(void *virtual_base, uint8_t *input) {
 
     uint8_t current_state[TOTAL];
 
-    int no_of_times = 10;
-    while(no_of_times--) {
+    while(1) {
         *(uint8_t *) start_signal_addr = 1;
         *(uint8_t *) start_signal_addr = 0;
         while(*(uint8_t *) complete_signal_addr != 1);
@@ -84,7 +83,7 @@ void gol_test(void *virtual_base, uint8_t *input) {
         }
         system("clear");
         printBoard(current_state);
-        usleep(1000000);
+        usleep(500000);
     }
 }
 

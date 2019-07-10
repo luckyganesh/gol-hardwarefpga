@@ -8,10 +8,17 @@ class CellTest(c: Cell, numberOfAliveNeighbours: Int , initialState: Int, expect
   currentStateOfNeighbours.zipWithIndex.foreach { case (neighbour, index) =>
     poke(c.io.currentStateOfNeighbours(index), neighbour)
   }
+  poke(c.io.start,0)
   poke(c.io.initialState, initialState)
   step(1)
+  poke(c.io.start,1)
+  step(1)
+  poke(c.io.start,0)
   expect(c.io.currentState, initialState)
   step(1)
+  poke(c.io.start,1)
+  step(1)
+  poke(c.io.start,0)
   expect(c.io.currentState, expectedState)
 }
 

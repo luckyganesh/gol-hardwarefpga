@@ -18,7 +18,7 @@ class GameOfLifeWrapper(size: Size) extends Module {
 
   val gameOfLife = Module(new GameOfLife(size, n => new Cell(n), new Connector))
 
-  gameOfLife.io.start := io.start.asClock()
+  gameOfLife.io.start := io.start
 
   val initializationCounter = RegInit(0.U(log2Ceil(size.total + 1).W))
   val writeCounter = RegInit(0.U(log2Ceil(size.total + 2).W))

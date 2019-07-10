@@ -181,7 +181,7 @@
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface
-   name="completed_pio_output"
+   name="completed_pio_input"
    internal="completed_pio.external_connection"
    type="conduit"
    dir="end" />
@@ -192,7 +192,7 @@
    dir="start" />
  <interface name="hps_0_hps_io" internal="hps_0.hps_io" type="conduit" dir="end" />
  <interface
-   name="initialize_pio_input"
+   name="initialize_pio_output"
    internal="initialize_pio.external_connection"
    type="conduit"
    dir="end" />
@@ -204,17 +204,17 @@
    dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface
-   name="reset_pio_input"
+   name="reset_pio_output"
    internal="reset_pio.external_connection"
    type="conduit"
    dir="end" />
  <interface
-   name="result_address_pio_input"
+   name="result_address_pio_output"
    internal="result_address_pio.external_connection"
    type="conduit"
    dir="end" />
  <interface
-   name="start_address_pio_input"
+   name="start_address_pio_output"
    internal="start_address_pio.external_connection"
    type="conduit"
    dir="end" />

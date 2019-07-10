@@ -10,14 +10,22 @@ class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
     }
   }
 
+  poke(c.io.start,0)
   step(1)
+  poke(c.io.start,1)
+  step(1)
+  poke(c.io.start,0)
   for (i <- inputSeq.indices) {
     for (j <- inputSeq(i).indices) {
       expect(c.io.currentState(i)(j), inputSeq(i)(j))
     }
   }
 
+  poke(c.io.start,0)
   step(1)
+  poke(c.io.start,1)
+  step(1)
+  poke(c.io.start,0)
   val expectation1 = Seq(Seq(false,true,false),Seq(false,true,false),Seq(false,true,false))
   for (i <- inputSeq.indices) {
     for (j <- inputSeq(i).indices) {
@@ -25,7 +33,11 @@ class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
     }
   }
 
+  poke(c.io.start,0)
   step(1)
+  poke(c.io.start,1)
+  step(1)
+  poke(c.io.start,0)
   val expectation2 = Seq(Seq(false,false,false),Seq(true,true,true),Seq(false,false,false))
   for (i <- inputSeq.indices) {
     for (j <- inputSeq(i).indices) {
@@ -33,7 +45,11 @@ class GameOfLifeIntegrationTest(c: GameOfLife) extends PeekPokeTester(c) {
     }
   }
 
+  poke(c.io.start,0)
   step(1)
+  poke(c.io.start,1)
+  step(1)
+  poke(c.io.start,0)
   val expectation3 = Seq(Seq(false,true,false),Seq(false,true,false),Seq(false,true,false))
 
   for (i <- inputSeq.indices) {
