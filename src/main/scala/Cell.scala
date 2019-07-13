@@ -1,10 +1,10 @@
 import chisel3._
-import chisel3.core.withClock
 
 class Cell(noOfNeighbourCells: Int) extends Module {
   val io = IO(new Bundle {
     val initialState = Input(Bool())
     val start = Input(Bool())
+    val enable = Input(Bool())
     val currentStateOfNeighbours = Input(Vec(noOfNeighbourCells, Bool()))
     val currentState = Output(Bool())
   })
@@ -12,7 +12,7 @@ class Cell(noOfNeighbourCells: Int) extends Module {
   private val presentState = RegInit(false.B)
   private val initialized = RegInit(false.B)
 
-  io.currentState := presentState
+  io.currentState := Mux(io.enable, presentState, false.B)
 
   private def numberOfAliveNeighbours(): UInt = io.currentStateOfNeighbours.count(n => n)
 
@@ -22,7 +22,7 @@ class Cell(noOfNeighbourCells: Int) extends Module {
   }
 
   when(io.start) {
-    presentState := Mux(initialized,getNextState(),io.initialState)
+    presentState := Mux(initialized, getNextState(), io.initialState)
     initialized := true.B
   }
 }

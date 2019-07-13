@@ -53,6 +53,9 @@ module GameOfLifeTop (
     wire start_pio_output_export;
     wire write_enable;	
     wire reset_pio_output_export;
+    wire [7:0] columns_pio_output_export;
+    wire [7:0] rows_pio_output_export;
+
 	 
     wire hps_fpga_reset_n;
     wire fpga_clk_50;
@@ -107,9 +110,13 @@ module GameOfLifeTop (
         .result_address_pio_output_export(result_address_pio_output_export),
         .start_address_pio_output_export(start_address_pio_output_export),
         .start_pio_output_export(start_pio_output_export),
-        .reset_pio_output_export(reset_pio_output_export)
+        .reset_pio_output_export(reset_pio_output_export),
+        .rows_pio_output_export(rows_pio_output_export),
+        .columns_pio_output_export(columns_pio_output_export)
     );
 
+
+    reg [25:0] counter;
     GameOfLifeWrapper GameOfLifeWrapper0(
         .io_address_to_access(onchip_memory2_0_address),
         .io_starting_address(start_address_pio_output_export),
@@ -121,10 +128,11 @@ module GameOfLifeTop (
         .io_start(start_pio_output_export),
         .clock(fpga_clk_50),
         .reset(reset_pio_output_export),
-        .io_write_enable(write_enable)
+        .io_write_enable(write_enable),
+        .io_rows(rows_pio_output_export),
+        .io_columns(columns_pio_output_export)
+//        .io_counter(LED)
     );
-
-    reg [25:0] counter;
     reg led_level;
     always @(posedge fpga_clk_50 or negedge hps_fpga_reset_n) begin
         if (~hps_fpga_reset_n) begin

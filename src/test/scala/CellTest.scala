@@ -8,6 +8,7 @@ class CellTest(c: Cell, numberOfAliveNeighbours: Int , initialState: Int, expect
   currentStateOfNeighbours.zipWithIndex.foreach { case (neighbour, index) =>
     poke(c.io.currentStateOfNeighbours(index), neighbour)
   }
+  poke(c.io.enable,1)
   poke(c.io.start,0)
   poke(c.io.initialState, initialState)
   step(1)
@@ -20,6 +21,9 @@ class CellTest(c: Cell, numberOfAliveNeighbours: Int , initialState: Int, expect
   step(1)
   poke(c.io.start,0)
   expect(c.io.currentState, expectedState)
+
+  poke(c.io.enable,0)
+  expect(c.io.currentState,0)
 }
 
 class CellSpec extends FlatSpec with Matchers {
