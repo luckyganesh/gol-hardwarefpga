@@ -1,0 +1,135 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system.qsys --block-symbol-file --output-directory=/home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system --family="Cyclone V" --part=5CSEBA6U23I7
+Progress: Loading de10/soc_system.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding columns_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module columns_pio
+Progress: Adding completed_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module completed_pio
+Progress: Adding hps_0 [altera_hps 18.1]
+Progress: Parameterizing module hps_0
+Progress: Adding initialize_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module initialize_pio
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding reset_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module reset_pio
+Progress: Adding result_address_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module result_address_pio
+Progress: Adding rows_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module rows_pio
+Progress: Adding start_address_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module start_address_pio
+Progress: Adding start_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module start_pio
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: soc_system.completed_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system.qsys --synthesis=VERILOG --output-directory=/home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis --family="Cyclone V" --part=5CSEBA6U23I7
+Progress: Loading de10/soc_system.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding columns_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module columns_pio
+Progress: Adding completed_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module completed_pio
+Progress: Adding hps_0 [altera_hps 18.1]
+Progress: Parameterizing module hps_0
+Progress: Adding initialize_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module initialize_pio
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding reset_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module reset_pio
+Progress: Adding result_address_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module result_address_pio
+Progress: Adding rows_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module rows_pio
+Progress: Adding start_address_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module start_address_pio
+Progress: Adding start_pio [altera_avalon_pio 18.1]
+Progress: Parameterizing module start_pio
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: soc_system.completed_pio: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: soc_system: Generating soc_system "soc_system" for QUARTUS_SYNTH
+Info: columns_pio: Starting RTL generation for module 'soc_system_columns_pio'
+Info: columns_pio:   Generation command is [exec /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/bin/perl -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/europa -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/perl_lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_columns_pio --dir=/tmp/alt8087_4283325302171483399.dir/0002_columns_pio_gen/ --quartus_dir=/home/sai-ganesh/intelFPGA_lite/18.1/quartus --verilog --config=/tmp/alt8087_4283325302171483399.dir/0002_columns_pio_gen//soc_system_columns_pio_component_configuration.pl  --do_build_sim=0  ]
+Info: columns_pio: Done RTL generation for module 'soc_system_columns_pio'
+Info: columns_pio: "soc_system" instantiated altera_avalon_pio "columns_pio"
+Info: completed_pio: Starting RTL generation for module 'soc_system_completed_pio'
+Info: completed_pio:   Generation command is [exec /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/bin/perl -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/europa -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/perl_lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_completed_pio --dir=/tmp/alt8087_4283325302171483399.dir/0003_completed_pio_gen/ --quartus_dir=/home/sai-ganesh/intelFPGA_lite/18.1/quartus --verilog --config=/tmp/alt8087_4283325302171483399.dir/0003_completed_pio_gen//soc_system_completed_pio_component_configuration.pl  --do_build_sim=0  ]
+Info: completed_pio: Done RTL generation for module 'soc_system_completed_pio'
+Info: completed_pio: "soc_system" instantiated altera_avalon_pio "completed_pio"
+Info: hps_0: "Running  for module: hps_0"
+Info: hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
+Info: initialize_pio: Starting RTL generation for module 'soc_system_initialize_pio'
+Info: initialize_pio:   Generation command is [exec /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/bin/perl -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/europa -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/perl_lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_initialize_pio --dir=/tmp/alt8087_4283325302171483399.dir/0004_initialize_pio_gen/ --quartus_dir=/home/sai-ganesh/intelFPGA_lite/18.1/quartus --verilog --config=/tmp/alt8087_4283325302171483399.dir/0004_initialize_pio_gen//soc_system_initialize_pio_component_configuration.pl  --do_build_sim=0  ]
+Info: initialize_pio: Done RTL generation for module 'soc_system_initialize_pio'
+Info: initialize_pio: "soc_system" instantiated altera_avalon_pio "initialize_pio"
+Info: onchip_memory2_0: Starting RTL generation for module 'soc_system_onchip_memory2_0'
+Info: onchip_memory2_0:   Generation command is [exec /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/bin/perl -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/europa -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/perl_lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=soc_system_onchip_memory2_0 --dir=/tmp/alt8087_4283325302171483399.dir/0005_onchip_memory2_0_gen/ --quartus_dir=/home/sai-ganesh/intelFPGA_lite/18.1/quartus --verilog --config=/tmp/alt8087_4283325302171483399.dir/0005_onchip_memory2_0_gen//soc_system_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_0: Done RTL generation for module 'soc_system_onchip_memory2_0'
+Info: onchip_memory2_0: "soc_system" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
+Info: result_address_pio: Starting RTL generation for module 'soc_system_result_address_pio'
+Info: result_address_pio:   Generation command is [exec /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/bin/perl -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/linux64/perl/lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/europa -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin/perl_lib -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/sopc_builder/bin -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/sai-ganesh/intelFPGA_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_result_address_pio --dir=/tmp/alt8087_4283325302171483399.dir/0006_result_address_pio_gen/ --quartus_dir=/home/sai-ganesh/intelFPGA_lite/18.1/quartus --verilog --config=/tmp/alt8087_4283325302171483399.dir/0006_result_address_pio_gen//soc_system_result_address_pio_component_configuration.pl  --do_build_sim=0  ]
+Info: result_address_pio: Done RTL generation for module 'soc_system_result_address_pio'
+Info: result_address_pio: "soc_system" instantiated altera_avalon_pio "result_address_pio"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_0: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: rst_controller: "soc_system" instantiated altera_reset_controller "rst_controller"
+Info: fpga_interfaces: "hps_0" instantiated altera_interface_generator "fpga_interfaces"
+Info: hps_io: "hps_0" instantiated altera_hps_io "hps_io"
+Info: onchip_memory2_0_s1_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "onchip_memory2_0_s1_translator"
+Info: hps_0_h2f_lw_axi_master_agent: "mm_interconnect_0" instantiated altera_merlin_axi_master_ni "hps_0_h2f_lw_axi_master_agent"
+Info: onchip_memory2_0_s1_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "onchip_memory2_0_s1_agent"
+Info: onchip_memory2_0_s1_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "onchip_memory2_0_s1_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: router_003: "mm_interconnect_0" instantiated altera_merlin_router "router_003"
+Info: hps_0_h2f_lw_axi_master_wr_limiter: "mm_interconnect_0" instantiated altera_merlin_traffic_limiter "hps_0_h2f_lw_axi_master_wr_limiter"
+Info: Reusing file /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
+Info: onchip_memory2_0_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "onchip_memory2_0_s1_burst_adapter"
+Info: Reusing file /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: onchip_memory2_0_s1_rsp_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "onchip_memory2_0_s1_rsp_width_adapter"
+Info: Reusing file /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /home/sai-ganesh/fpga_de10/gol-fpga/fpga/de10/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_001: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
+Info: border: "hps_io" instantiated altera_interface_generator "border"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: error_adapter_0: "avalon_st_adapter_001" instantiated error_adapter "error_adapter_0"
+Info: soc_system: Done "soc_system" with 30 modules, 89 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

@@ -1,0 +1,42 @@
+	soc_system u0 (
+		.clk_clk                              (<connected-to-clk_clk>),                              //                       clk.clk
+		.completed_pio_input_export           (<connected-to-completed_pio_input_export>),           //       completed_pio_input.export
+		.hps_0_h2f_reset_reset_n              (<connected-to-hps_0_h2f_reset_reset_n>),              //           hps_0_h2f_reset.reset_n
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO09 (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO09>), //              hps_0_hps_io.hps_io_gpio_inst_GPIO09
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO35 (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO35>), //                          .hps_io_gpio_inst_GPIO35
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO40 (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO40>), //                          .hps_io_gpio_inst_GPIO40
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO53 (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO53>), //                          .hps_io_gpio_inst_GPIO53
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO54 (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO54>), //                          .hps_io_gpio_inst_GPIO54
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO61 (<connected-to-hps_0_hps_io_hps_io_gpio_inst_GPIO61>), //                          .hps_io_gpio_inst_GPIO61
+		.initialize_pio_output_export         (<connected-to-initialize_pio_output_export>),         //     initialize_pio_output.export
+		.memory_mem_a                         (<connected-to-memory_mem_a>),                         //                    memory.mem_a
+		.memory_mem_ba                        (<connected-to-memory_mem_ba>),                        //                          .mem_ba
+		.memory_mem_ck                        (<connected-to-memory_mem_ck>),                        //                          .mem_ck
+		.memory_mem_ck_n                      (<connected-to-memory_mem_ck_n>),                      //                          .mem_ck_n
+		.memory_mem_cke                       (<connected-to-memory_mem_cke>),                       //                          .mem_cke
+		.memory_mem_cs_n                      (<connected-to-memory_mem_cs_n>),                      //                          .mem_cs_n
+		.memory_mem_ras_n                     (<connected-to-memory_mem_ras_n>),                     //                          .mem_ras_n
+		.memory_mem_cas_n                     (<connected-to-memory_mem_cas_n>),                     //                          .mem_cas_n
+		.memory_mem_we_n                      (<connected-to-memory_mem_we_n>),                      //                          .mem_we_n
+		.memory_mem_reset_n                   (<connected-to-memory_mem_reset_n>),                   //                          .mem_reset_n
+		.memory_mem_dq                        (<connected-to-memory_mem_dq>),                        //                          .mem_dq
+		.memory_mem_dqs                       (<connected-to-memory_mem_dqs>),                       //                          .mem_dqs
+		.memory_mem_dqs_n                     (<connected-to-memory_mem_dqs_n>),                     //                          .mem_dqs_n
+		.memory_mem_odt                       (<connected-to-memory_mem_odt>),                       //                          .mem_odt
+		.memory_mem_dm                        (<connected-to-memory_mem_dm>),                        //                          .mem_dm
+		.memory_oct_rzqin                     (<connected-to-memory_oct_rzqin>),                     //                          .oct_rzqin
+		.onchip_memory2_0_s2_address          (<connected-to-onchip_memory2_0_s2_address>),          //       onchip_memory2_0_s2.address
+		.onchip_memory2_0_s2_chipselect       (<connected-to-onchip_memory2_0_s2_chipselect>),       //                          .chipselect
+		.onchip_memory2_0_s2_clken            (<connected-to-onchip_memory2_0_s2_clken>),            //                          .clken
+		.onchip_memory2_0_s2_write            (<connected-to-onchip_memory2_0_s2_write>),            //                          .write
+		.onchip_memory2_0_s2_readdata         (<connected-to-onchip_memory2_0_s2_readdata>),         //                          .readdata
+		.onchip_memory2_0_s2_writedata        (<connected-to-onchip_memory2_0_s2_writedata>),        //                          .writedata
+		.reset_reset_n                        (<connected-to-reset_reset_n>),                        //                     reset.reset_n
+		.reset_pio_output_export              (<connected-to-reset_pio_output_export>),              //          reset_pio_output.export
+		.result_address_pio_output_export     (<connected-to-result_address_pio_output_export>),     // result_address_pio_output.export
+		.start_address_pio_output_export      (<connected-to-start_address_pio_output_export>),      //  start_address_pio_output.export
+		.start_pio_output_export              (<connected-to-start_pio_output_export>),              //          start_pio_output.export
+		.rows_pio_output_export               (<connected-to-rows_pio_output_export>),               //           rows_pio_output.export
+		.columns_pio_output_export            (<connected-to-columns_pio_output_export>)             //        columns_pio_output.export
+	);
+

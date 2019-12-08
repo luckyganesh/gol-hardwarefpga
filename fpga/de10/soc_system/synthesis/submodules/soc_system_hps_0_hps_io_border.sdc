@@ -1,0 +1,12 @@
+set_false_path -from [get_ports hps_io_hps_io_gpio_inst_GPIO09] -to *
+set_false_path -from * -to [get_ports hps_io_hps_io_gpio_inst_GPIO09]
+set_false_path -from [get_ports hps_io_hps_io_gpio_inst_GPIO35] -to *
+set_false_path -from * -to [get_ports hps_io_hps_io_gpio_inst_GPIO35]
+set_false_path -from [get_ports hps_io_hps_io_gpio_inst_GPIO40] -to *
+set_false_path -from * -to [get_ports hps_io_hps_io_gpio_inst_GPIO40]
+set_false_path -from [get_ports hps_io_hps_io_gpio_inst_GPIO53] -to *
+set_false_path -from * -to [get_ports hps_io_hps_io_gpio_inst_GPIO53]
+set_false_path -from [get_ports hps_io_hps_io_gpio_inst_GPIO54] -to *
+set_false_path -from * -to [get_ports hps_io_hps_io_gpio_inst_GPIO54]
+set_false_path -from [get_ports hps_io_hps_io_gpio_inst_GPIO61] -to *
+set_false_path -from * -to [get_ports hps_io_hps_io_gpio_inst_GPIO61]
